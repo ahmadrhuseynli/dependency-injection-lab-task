@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+        <!-- Person bean using setter injection -->
+        <bean id="personBean" class="az.edu.ada.wm2.dependency_injection_example.beans.Person" scope="prototype">
+                <property name="id" value="PER001" />
+                <property name="firstName" value="John" />
+                <property name="lastName" value="Doe" />
+        </bean>
+
+        <!-- Person bean using constructor injection -->
+        <bean id="anotherPersonBean" class="az.edu.ada.wm2.dependency_injection_example.beans.Person" scope="prototype">
+                <constructor-arg value="PER002" />
+                <constructor-arg value="Foo" />
+                <constructor-arg value="Bar" />
+        </bean>
+
+        <!-- Product bean using setter injection -->
+        <bean id="productBean" class="az.edu.ada.wm2.dependency_injection_example.beans.Product" scope="prototype">
+                <property name="id" value="P001" />
+                <property name="name" value="Laptop" />
+                <property name="price" value="2000.0" />
+        </bean>
+
+        <!-- Product bean using constructor injection -->
+        <bean id="anotherProductBean" class="az.edu.ada.wm2.dependency_injection_example.beans.Product" scope="prototype">
+                <constructor-arg value="P002" />
+                <constructor-arg value="PC" />
+                <constructor-arg value="1500.00" />
+        </bean>
+
+        <!-- Order bean: depends on a Person and a Product -->
+        <bean id="orderBean" class="az.edu.ada.wm2.dependency_injection_example.beans.Order" scope="prototype">
+                <property name="id" value="ORD001" />
+                <!-- Injecting a Person bean as the owner -->
+                <property name="owner" ref="personBean" />
+                <!-- Injecting a list of Product beans -->
+                <property name="products">
+                        <list>
+                                <ref bean="productBean" />
+                                <!-- You can add more product references here if needed -->
+                        </list>
+                </property>
+                <!-- Example total value -->
+                <property name="total" value="2000.0" />
+        </bean>
+
+</beans>
