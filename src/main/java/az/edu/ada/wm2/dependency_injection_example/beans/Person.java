@@ -5,9 +5,7 @@ public class Person {
     private String firstName;
     private String lastName;
 
-    // Default constructor
     public Person() {
-
     }
 
     public Person(String id, String firstName, String lastName) {
@@ -16,27 +14,22 @@ public class Person {
         this.lastName = lastName;
     }
 
-
+    // Getters and setters
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -46,8 +39,7 @@ public class Person {
         return "Person{" +
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", lastName=" + lastName +
+                ", lastName='" + lastName + '\'' +
                 '}';
     }
-
 }

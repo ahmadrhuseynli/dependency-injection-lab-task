@@ -6,14 +6,11 @@ import az.edu.ada.wm2.dependency_injection_example.beans.Product;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Scope;
 
-import java.util.Collections;
 import java.util.List;
 
 @Configuration
-@ImportResource("classpath:applicationContext.xml")
 public class AppConfig {
 
     // -- PERSON BEANS --
@@ -33,7 +30,7 @@ public class AppConfig {
 
     // -- PRODUCT BEANS --
     @Bean
-    public Product defaultProduct() {
+    public Product productBean() {
         Product product = new Product();
         product.setId("P001");
         product.setName("Laptop");
@@ -46,7 +43,7 @@ public class AppConfig {
         return new Product("P002", "PC", 1500.0);
     }
 
-    // -- ORDER BEAN --
+    // -- ORDER BEAN (prototype scope) --
     @Bean
     @Scope("prototype")
     public Order orderBean(
@@ -54,9 +51,10 @@ public class AppConfig {
             @Qualifier("productBean") Product product
     ) {
         Order order = new Order();
+        order.setId("ORD001");
         order.setOwner(owner);
         order.setProducts(List.of(product));
+        order.setTotal(2000.0);
         return order;
     }
-
 }
